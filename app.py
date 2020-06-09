@@ -1,16 +1,7 @@
-from io import BytesIO
-import os
-import random
-from twilio.rest import Client
-from dotenv import load_dotenv
 from flask import Flask, request, url_for
-from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 
-load_dotenv()
-
 app = Flask(__name__)
-client = Client()
 
 playersDictionary = {}
 
@@ -36,7 +27,6 @@ def set_status(status, player):
 @app.route('/webhook', methods=['POST'])
 def webhook():
     player = request.form.get('From')
-    twilioNumber = request.form.get('To')
     message = request.form.get('Body').lower()
 
     if message == 'check':
